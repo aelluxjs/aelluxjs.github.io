@@ -4,7 +4,7 @@
 
   const source = window.librarySource;
   const base = new URL("../", document.currentScript.src);
-  const dist = new URL("../../dist/", base);
+  const dist = new URL("https://cdn.jsdelivr.net/gh/aelluxjs/core@release%2F0.1.0/dist/");
   const categories = new Map(source.categories.map(category => [category.id, category]));
   const snippets = new Map(source.snippets.map(snippet => [snippet.id, snippet]));
   const cards = new Map();
@@ -229,7 +229,7 @@
       const dependencyScripts = bootstrapURL => (hasRuntime ? inlineScript(setup(bootstrapURL)) + inlineScript(runtime) : "") + scripts.map(inlineScript).join("") + adapters.map(inlineScript).join("");
       // O POST leva os mesmos assets da prévia, inclusive em desenvolvimento local.
       // Nenhum recurso do CodePen depende de localhost ou de uma versão publicada.
-      state.exportHead = `<meta name="viewport" content="width=device-width,initial-scale=1"><style>${dependencyStyles}</style>${dependencyScripts("https://aelluxjs.github.io/core/dist/aellux.min.js")}`;
+      state.exportHead = `<meta name="viewport" content="width=device-width,initial-scale=1"><style>${dependencyStyles}</style>${dependencyScripts(new URL("aellux.min.js", dist).href)}`;
       state.card.querySelector(".preview-codepen").disabled = false;
       const bridge = `(()=>{const send=(type,message)=>parent.postMessage({type,token:${serialize(token)},message},"*");
         window.addEventListener("error",e=>send("library-error",e.message));

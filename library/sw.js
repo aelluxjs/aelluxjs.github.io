@@ -1,10 +1,10 @@
 /* Application-owned worker: the public runtime is outside the app's URL scope.
    Keep this explicit list aligned with snippets.js; bump VERSION on deployment. */
-const VERSION = "8";
+const VERSION = "9";
 const PREFIX = `aellux-library:${self.registration.scope}:`;
 const CACHE = PREFIX + VERSION;
 const app = path => new URL(path, self.registration.scope).href;
-const dist = file => app(`../../dist/${file}`);
+const dist = file => new URL(file, "https://cdn.jsdelivr.net/gh/aelluxjs/core@release%2F0.1.0/dist/").href;
 const extensions = ["input", "present", "adaptive", "scrollbox", "scrollbox-snap", "viewport", "preference", "focus", "anchor", "feedback", "state-navigation", "pwa"];
 const styled = ["input", "present", "adaptive", "scrollbox", "anchor", "feedback"];
 const PRECACHE = [
@@ -46,11 +46,10 @@ self.addEventListener("fetch", event => {
   const request = event.request;
   if (request.method !== "GET" || request.headers.has("authorization") || request.headers.has("range")) return;
   const url = new URL(request.url);
-  if (url.origin !== self.location.origin) return;
   const isEntry = url.href === app("") || url.href === app("index.htm") ||
     (url.origin + url.pathname === app("index.htm") || url.origin + url.pathname === app(""));
   if (request.mode === "navigate") {
-    if (!isEntry) return;
+    if (url.origin !== self.location.origin || !isEntry) return;
     event.respondWith((async () => {
       try { return await fetch(request); }
       catch { return (await caches.open(CACHE)).match(app("index.htm")); }

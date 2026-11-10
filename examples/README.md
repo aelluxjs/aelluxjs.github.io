@@ -1,7 +1,7 @@
 # Homepage examples
 
 Run `node tests/browser/server.mjs` from the repository root and open
-`http://127.0.0.1:4173/home/index.htm`. Serve over HTTP for runtime loading and
+`http://127.0.0.1:4173/index.htm`. Serve over HTTP for runtime loading and
 same-origin source viewing. Each example also runs as a standalone page.
 
 The four experiences use only the ten bundled primitives. They do not register
@@ -51,8 +51,9 @@ There is no dedicated examples stylesheet.
 Source disclosures fetch the exact executed HTML and JavaScript. Shared
 `home.css` is omitted from the file list. Highlight.js loads through `$ae.dep()`
 with cached 11.12 CDN dependencies and GitHub light/dark styles. The source stays
-readable and copyable if highlighting fails. Preserve the relative `home/` and
-`dist/` structure when deploying under a repository prefix.
+readable and copyable if highlighting fails. Runtime assets load from the Core release branch through jsDelivr:
+`https://cdn.jsdelivr.net/gh/aelluxjs/core@release%2F0.1.0/dist/`. Documentation remains at
+https://aelluxjs.github.io/core/docs/.
 
 Viewport, Input and Focus retain their documented stability status. Browser
 regressions cover core interactions, runtime assets, intermediate visual values,

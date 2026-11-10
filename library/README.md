@@ -2,7 +2,7 @@
 
 Experiências responsivas prontas para incorporar a páginas existentes. O catálogo tem **17 snippets em sete categorias**, incluindo os 12 exemplos prioritários e a evolução dos exemplos anteriores. A Library organiza soluções pelo que a pessoa quer construir; os detalhes de API continuam na documentação de extensões.
 
-Abra `home/library/index.htm` em um servidor HTTP local ou HTTPS. Não há etapa de build própria nem dependência de CDN: Bootstrap 5.3.8 está em `vendor/`, com sua licença, e os arquivos aellux.js são os de `../../dist/`.
+Abra `library/index.htm` em um servidor HTTP local ou HTTPS. Não há etapa de build própria. Bootstrap 5.3.8 está em `vendor/`, com sua licença. Os arquivos aellux.js vêm do jsDelivr, pela branch `release/0.1.0` de `aelluxjs/core`: `https://cdn.jsdelivr.net/gh/aelluxjs/core@release%2F0.1.0/dist/`.
 
 - **Conteúdo:** `assets/snippets.js` contém o objeto `window.librarySource`. Cada exemplo define `id` único, `title`, `description`, `category`, `tags`, `extensions`, `dependencies`, `features` e `code` (HTML, CSS e JavaScript do componente). Categorias também estão no objeto. `extensions` determina os registros Basic e os assets da prévia; `dependencies` declara Bootstrap quando necessário; `features` descreve capacidades concretas. Cards mostram esses requisitos e instruções de integração.
 - **Apresentação:** `assets/library.js`, carregado no final da página, possui o template único `renderCard()` e o documento compartilhado das prévias. Para mudar todos os cards, altere esse renderizador e `assets/library.css`.
@@ -14,9 +14,9 @@ Abra `home/library/index.htm` em um servidor HTTP local ou HTTPS. Não há etapa
 - **PWA:** `manifest.webmanifest` e `sw.js` preparam o app inteiro e todos os exemplos já na primeira visita online, mesmo os ainda não vistos. Instalação usa a extensão PWA e instruções manuais quando necessário. A instalação efetiva depende do navegador; o indicador de offline só confirma depois da ativação do worker.
 - **Marca:** o cabeçalho usa o quadrado com “æ” e as proporções do hero e dos SVGs da homepage. `../assets/bootstrap-brand.css` compartilha a paleta com a homepage, as prévias e os exemplos enviados ao CodePen: warning padrão do Bootstrap (#FFC107) no modo claro, amarelo JavaScript (#F7DF1E) no escuro e grafite (#232323) nos textos do modo claro e no “æ”. Textos sobre fundos escuros mantêm contraste. Os ícones de instalação usam a paleta clara; `assets/icon.svg` incorpora Geist e origina os PNGs de 192 e 512 px. A fonte local do logotipo e sua licença estão em `assets/geist-latin.woff2` e `assets/geist.OFL.txt`.
 
-Ao adicionar extensões ou assets aos exemplos, inclua seus arquivos na lista explícita de `sw.js`. O worker aceita somente assets públicos listados, inclusive os arquivos `dist/` fora da pasta do app, e não intercepta outras páginas. Incremente `VERSION` ao publicar alterações para renovar o cache. A atualização aguarda o botão Atualizar biblioteca e preserva os favoritos antes de recarregar. O navegador pode remover caches por falta de espaço.
+Ao adicionar extensões ou assets aos exemplos, inclua seus arquivos na lista explícita de `sw.js`. O worker aceita somente assets públicos listados, inclusive os arquivos do Core no jsDelivr, e não intercepta outras páginas. Incremente `VERSION` ao publicar alterações para renovar o cache. A atualização aguarda o botão Atualizar biblioteca e preserva os favoritos antes de recarregar. O navegador pode remover caches por falta de espaço.
 
-Verificação de integração: `npx playwright test tests/browser/library.spec.mjs tests/browser/library-catalog.spec.mjs` (ou `--config playwright.isolated.config.mjs` com `node tests/browser/server.mjs` já iniciado). Validação do contrato do catálogo e da cobertura de assets offline: `node --test tests/unit/library-source.test.mjs`.
+Verificação de integração: `npx playwright test tests/browser/library.spec.mjs tests/browser/library-catalog.spec.mjs`. Validação do contrato do catálogo e da cobertura de assets offline: `node --test tests/unit/library-source.test.mjs`.
 
 ## Catálogo e integração
 
