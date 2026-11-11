@@ -9,7 +9,10 @@ export async function clickAfterScroll(locator) {
   await locator.evaluate(element => element.scrollIntoView({
     behavior: "instant", block: "center", inline: "nearest"
   }));
-  await locator.click();
+  // A nonzero delay makes Playwright await move/down/up in order instead of
+  // sending them concurrently. Linux WebKit can otherwise lose the release
+  // around iframe surfaces even after the main document has stopped scrolling.
+  await locator.click({ delay: 50 });
 }
 
 export const test = base.extend({
