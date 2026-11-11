@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, test } from "./diagnostics.mjs";
 import { readFile } from "node:fs/promises";
 
 const logs = new WeakMap();
@@ -476,6 +476,14 @@ for (const name of ["carousel", "viewport", "floating", "navigation"]) {
     await page.evaluate(() => document.documentElement.style.fontSize = "200%");
     await page.setViewportSize({ width: 320, height: 640 });
     await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    if (name === "carousel") {
+      // System font metrics vary between Windows and the Ubuntu CI runner.
+      await page.evaluate(() => {
+        document.body.style.fontFamily = "Verdana, sans-serif";
+        document.body.style.setProperty("--bs-heading-font-family", "Verdana, sans-serif");
+      });
+      await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    }
   });
 }
 

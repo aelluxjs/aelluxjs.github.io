@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, test } from "./diagnostics.mjs";
 import { readFile } from "node:fs/promises";
 import { runInNewContext } from "node:vm";
 import { openCodePen } from "./library-codepen.mjs";
