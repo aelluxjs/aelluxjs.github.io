@@ -33,6 +33,9 @@ npm run dev
 Open http://127.0.0.1:4173/. No website build or local Core checkout is required.
 The first visit needs internet access for runtime dependencies.
 
+Homepage and Library testing is manual. No CI test workflow runs on pushes or
+pull requests; the following commands remain available for optional local checks.
+
 ```sh
 npm run test:unit
 npx playwright install
