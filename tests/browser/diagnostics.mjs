@@ -1,6 +1,17 @@
 import { test as base, expect } from "@playwright/test";
 
 export { expect };
+
+export async function clickAfterScroll(locator) {
+  // WebKit on Linux can continue smooth scrolling between mouse down and up,
+  // moving the target away from the pointer. Cancel pending scroll animation
+  // before Playwright checks stability and performs a real pointer click.
+  await locator.evaluate(element => element.scrollIntoView({
+    behavior: "instant", block: "center", inline: "nearest"
+  }));
+  await locator.click();
+}
+
 export const test = base.extend({
   diagnostics: [async ({ page }, use, testInfo) => {
     await page.addInitScript(() => {

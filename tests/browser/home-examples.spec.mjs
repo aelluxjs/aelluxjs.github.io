@@ -1,4 +1,4 @@
-import { expect, test } from "./diagnostics.mjs";
+import { clickAfterScroll, expect, test } from "./diagnostics.mjs";
 import { readFile } from "node:fs/promises";
 
 const logs = new WeakMap();
@@ -718,13 +718,17 @@ test("homepage embeds four themed demos and displays the exact runnable source",
     await expect(frame.locator("html")).toHaveAttribute("data-bs-theme", "dark");
   }
   const source = page.locator('[data-example-source="carousel"]');
-  await source.locator(":scope > .source-toggle").click();
+  await clickAfterScroll(source.locator(":scope > .source-toggle"));
+  await expect(source.locator(":scope > .source-panel")).toHaveClass(/ae--pop\b/);
+  await expect(source.locator(":scope > .source-panel")).not.toHaveClass(/ae--popping\b/);
   await expect(source.locator(".source-file > .source-toggle")).toHaveText([
     "examples/carousel.htm", "examples/carousel.js"
   ]);
   for (const file of await source.locator(".source-file").all()) {
     const path = await file.locator(":scope > .source-toggle").textContent();
-    await file.locator(":scope > .source-toggle").click();
+    await clickAfterScroll(file.locator(":scope > .source-toggle"));
+    await expect(file.locator(":scope > .source-panel")).toHaveClass(/ae--pop\b/);
+    await expect(file.locator(":scope > .source-panel")).not.toHaveClass(/ae--popping\b/);
     await expect(file.getByRole("button", { name: `Copy ${path}`, exact: true })).toBeEnabled();
     await expect(file.locator("code")).toHaveAttribute("data-highlighted", "yes");
     await expect(file.locator("pre")).toHaveAttribute("data-ae-scrollbar", "horizontal vertical");

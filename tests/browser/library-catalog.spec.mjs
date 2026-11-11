@@ -1,4 +1,4 @@
-import { expect, test } from "./diagnostics.mjs";
+import { clickAfterScroll, expect, test } from "./diagnostics.mjs";
 import { readFile } from "node:fs/promises";
 import { runInNewContext } from "node:vm";
 import { openCodePen } from "./library-codepen.mjs";
@@ -13,7 +13,7 @@ async function open(page, id) {
   const card = page.locator(`#snippet-${id}`);
   await card.locator(".preview-slot").scrollIntoViewIfNeeded();
   await expect(card.locator(".preview-state")).toHaveText("· ao vivo");
-  await card.locator('[data-action="expand"]').click();
+  await clickAfterScroll(card.locator('[data-action="expand"]'));
   await expect(card.locator('.preview-shell')).toHaveClass(/is-fullscreen/);
   return { card, frame: page.frameLocator(`#snippet-${id} iframe`) };
 }
@@ -28,7 +28,7 @@ for (const [preset, width] of [["mobile", 375], ["tablet", 768], ["desktop", 128
       const card = page.locator(`#snippet-${snippet.id}`);
       await card.locator(".preview-slot").scrollIntoViewIfNeeded();
       await expect(card.locator(".preview-state"), snippet.id).toHaveText("· ao vivo");
-      await card.locator('[data-action="expand"]').click();
+      await clickAfterScroll(card.locator('[data-action="expand"]'));
       await expect(card.locator('.preview-shell')).toHaveClass(/is-fullscreen/);
       await card.locator('.preview-width').selectOption(preset);
       const frame = page.frameLocator(`#snippet-${snippet.id} iframe`);
