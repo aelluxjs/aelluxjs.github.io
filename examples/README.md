@@ -51,8 +51,8 @@ There is no dedicated examples stylesheet.
 Source disclosures fetch the exact executed HTML and JavaScript. Shared
 `home.css` is omitted from the file list. Highlight.js loads through `$ae.dep()`
 with cached 11.12 CDN dependencies and GitHub light/dark styles. The source stays
-readable and copyable if highlighting fails. Runtime assets load from the Core release branch through jsDelivr:
-`https://cdn.jsdelivr.net/gh/aelluxjs/core@release%2F0.1.0/dist/`. Documentation remains at
+readable and copyable if highlighting fails. Regular runtime assets load from a fixed Core release commit through jsDelivr:
+`https://cdn.jsdelivr.net/gh/aelluxjs/core@af06c0fae0fb0d0364f0c77a8cd3ad423539d961/dist/`. Documentation remains at
 https://aelluxjs.github.io/core/docs/.
 
 Viewport, Input and Focus retain their documented stability status. Browser

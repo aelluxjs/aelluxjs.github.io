@@ -7,16 +7,19 @@ standalone `examples/` and the offline-capable `library/`. These files were
 extracted from `aelluxjs/core` with their Git history. Runtime source, builds
 and documentation remain in [Core](https://github.com/aelluxjs/core).
 
-Core assets load from the GitHub `release/0.1.0` branch through jsDelivr:
+Core assets load from a fixed commit of `release/0.1.0` through jsDelivr:
 
 ```text
-https://cdn.jsdelivr.net/gh/aelluxjs/core@release%2F0.1.0/dist/
+https://cdn.jsdelivr.net/gh/aelluxjs/core@af06c0fae0fb0d0364f0c77a8cd3ad423539d961/dist/
 ```
 
-The encoded slash identifies the complete branch name. Updating the branch
-does not invalidate the CDN cache immediately. The Library caches its explicit
-runtime dependencies after the first successful online visit; increment its
-service worker `VERSION` when deploying changes to those dependencies.
+Use the regular `aellux.js` entry point and matching regular assets: jsDelivr can
+generate `.min` files dynamically, changing the bytes signed by Core's integrity
+metadata. The commit pin keeps the boot script and its dependencies on the same
+release. Update the pin consistently in pages, Library exports, tests and the
+service worker. The Library caches its explicit runtime dependencies after the
+first successful online visit; increment its service worker `VERSION` when
+deploying changes to those dependencies.
 
 Documentation: https://aelluxjs.github.io/core/docs/0.1.x/
 

@@ -4,7 +4,7 @@
 
   const source = window.librarySource;
   const base = new URL("../", document.currentScript.src);
-  const dist = new URL("https://cdn.jsdelivr.net/gh/aelluxjs/core@release%2F0.1.0/dist/");
+  const dist = new URL("https://cdn.jsdelivr.net/gh/aelluxjs/core@af06c0fae0fb0d0364f0c77a8cd3ad423539d961/dist/");
   const categories = new Map(source.categories.map(category => [category.id, category]));
   const snippets = new Map(source.snippets.map(snippet => [snippet.id, snippet]));
   const cards = new Map();
@@ -213,11 +213,11 @@
       const [bootstrap, palette, boot, runtime, scripts, styles, adapters] = await Promise.all([
         state.snippet.dependencies.length ? fetchText(new URL("vendor/bootstrap.min.css", base)) : "",
         state.snippet.dependencies.length ? fetchText(new URL("../assets/bootstrap-brand.css", base)) : "",
-        hasRuntime ? fetchText(new URL("aellux.min.js", dist)) : "",
-        hasRuntime ? fetchText(new URL("aellux.orchestrator.min.js", dist)) : "",
-        Promise.all(extensions.map(name => fetchText(new URL(`aellux.ext.${name}.min.js`, dist)))),
-        Promise.all(styleExtensions.map(name => fetchText(new URL(`aellux.ext.${name}.min.css`, dist)))),
-        Promise.all((extensions.includes("input") ? ["point", "keyboard"] : []).map(name => fetchText(new URL(`aellux.input.${name}.min.js`, dist))))
+        hasRuntime ? fetchText(new URL("aellux.js", dist)) : "",
+        hasRuntime ? fetchText(new URL("aellux.orchestrator.js", dist)) : "",
+        Promise.all(extensions.map(name => fetchText(new URL(`aellux.ext.${name}.js`, dist)))),
+        Promise.all(styleExtensions.map(name => fetchText(new URL(`aellux.ext.${name}.css`, dist)))),
+        Promise.all((extensions.includes("input") ? ["point", "keyboard"] : []).map(name => fetchText(new URL(`aellux.input.${name}.js`, dist))))
       ]);
       if (revision !== state.revision || !shouldRun(state)) return;
       const token = state.token = `${state.snippet.id}:${revision}:${Math.random()}`;
@@ -229,7 +229,7 @@
       const dependencyScripts = bootstrapURL => (hasRuntime ? inlineScript(setup(bootstrapURL)) + inlineScript(runtime) : "") + scripts.map(inlineScript).join("") + adapters.map(inlineScript).join("");
       // O POST leva os mesmos assets da prévia, inclusive em desenvolvimento local.
       // Nenhum recurso do CodePen depende de localhost ou de uma versão publicada.
-      state.exportHead = `<meta name="viewport" content="width=device-width,initial-scale=1"><style>${dependencyStyles}</style>${dependencyScripts(new URL("aellux.min.js", dist).href)}`;
+      state.exportHead = `<meta name="viewport" content="width=device-width,initial-scale=1"><style>${dependencyStyles}</style>${dependencyScripts(new URL("aellux.js", dist).href)}`;
       state.card.querySelector(".preview-codepen").disabled = false;
       const bridge = `(()=>{const send=(type,message)=>parent.postMessage({type,token:${serialize(token)},message},"*");
         window.addEventListener("error",e=>send("library-error",e.message));
@@ -245,7 +245,7 @@
         ${hasRuntime ? '$ae.on("Ready",()=>send("library-ready"),{once:true});' : 'window.addEventListener("DOMContentLoaded",()=>send("library-ready"),{once:true});'}})();`;
       const start = `$ae.updatePreferenceAttributesHTML();$ae.startAelluxJs().catch(error=>parent.postMessage({type:"library-error",token:${serialize(token)},message:error.message},"*"));`;
       const background = `<style id="library-preview-background">html body{isolation:isolate!important;}html body::before{content:""!important;position:fixed!important;inset:0!important;background:rgba(255,214,58,.12)!important;pointer-events:none!important;z-index:-1!important;}</style>`;
-      const html = `<!doctype html><html lang="pt-BR" data-bs-theme="${theme}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escapeHTML(state.snippet.title)}</title><style>${dependencyStyles}\nhtml{color-scheme:${theme};}</style>${dependencyScripts(new URL("aellux.min.js", dist).href)}${inlineScript(bridge)}</head><body>${state.snippet.code}${background}${hasRuntime ? inlineScript(start) : ""}</body></html>`;
+      const html = `<!doctype html><html lang="pt-BR" data-bs-theme="${theme}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escapeHTML(state.snippet.title)}</title><style>${dependencyStyles}\nhtml{color-scheme:${theme};}</style>${dependencyScripts(new URL("aellux.js", dist).href)}${inlineScript(bridge)}</head><body>${state.snippet.code}${background}${hasRuntime ? inlineScript(start) : ""}</body></html>`;
       replaceFrame(state, html);
       state.loaded = true;
       state.loading = false;

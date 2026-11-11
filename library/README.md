@@ -2,7 +2,7 @@
 
 Experiências responsivas prontas para incorporar a páginas existentes. O catálogo tem **17 snippets em sete categorias**, incluindo os 12 exemplos prioritários e a evolução dos exemplos anteriores. A Library organiza soluções pelo que a pessoa quer construir; os detalhes de API continuam na documentação de extensões.
 
-Abra `library/index.htm` em um servidor HTTP local ou HTTPS. Não há etapa de build própria. Bootstrap 5.3.8 está em `vendor/`, com sua licença. Os arquivos aellux.js vêm do jsDelivr, pela branch `release/0.1.0` de `aelluxjs/core`: `https://cdn.jsdelivr.net/gh/aelluxjs/core@release%2F0.1.0/dist/`.
+Abra `library/index.htm` em um servidor HTTP local ou HTTPS. Não há etapa de build própria. Bootstrap 5.3.8 está em `vendor/`, com sua licença. Os arquivos aellux.js vêm do jsDelivr, em variantes regulares de um commit fixo da branch `release/0.1.0` de `aelluxjs/core`: `https://cdn.jsdelivr.net/gh/aelluxjs/core@af06c0fae0fb0d0364f0c77a8cd3ad423539d961/dist/`.
 
 - **Conteúdo:** `assets/snippets.js` contém o objeto `window.librarySource`. Cada exemplo define `id` único, `title`, `description`, `category`, `tags`, `extensions`, `dependencies`, `features` e `code` (HTML, CSS e JavaScript do componente). Categorias também estão no objeto. `extensions` determina os registros Basic e os assets da prévia; `dependencies` declara Bootstrap quando necessário; `features` descreve capacidades concretas. Cards mostram esses requisitos e instruções de integração.
 - **Apresentação:** `assets/library.js`, carregado no final da página, possui o template único `renderCard()` e o documento compartilhado das prévias. Para mudar todos os cards, altere esse renderizador e `assets/library.css`.

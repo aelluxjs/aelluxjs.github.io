@@ -22,7 +22,7 @@ test("Library preserves stored snippet IDs and declares executable component fra
   assert.deepEqual(Array.from(source.snippets.find(snippet => snippet.id === "responsive-split-hero").extensions), []);
 });
 
-const cdn = "https://cdn.jsdelivr.net/gh/aelluxjs/core@release%2F0.1.0/dist/";
+const cdn = "https://cdn.jsdelivr.net/gh/aelluxjs/core@af06c0fae0fb0d0364f0c77a8cd3ad423539d961/dist/";
 const worker = await readFile(new URL("../../library/sw.js", import.meta.url), "utf8");
 
 for (const site of ["https://library.test/", "https://library.test/preview/"]) {
@@ -33,11 +33,11 @@ for (const site of ["https://library.test/", "https://library.test/preview/"]) {
     const styled = new Set(["input", "present", "anchor", "scrollbox", "adaptive", "feedback"]);
     for (const snippet of source.snippets) {
       for (const extension of snippet.extensions) {
-        assert.ok(cached.has(`${cdn}aellux.ext.${extension}.min.js`), `${snippet.id}: ${extension}`);
-        if (styled.has(extension)) assert.ok(cached.has(`${cdn}aellux.ext.${extension}.min.css`), `${snippet.id}: stylesheet ${extension}`);
+        assert.ok(cached.has(`${cdn}aellux.ext.${extension}.js`), `${snippet.id}: ${extension}`);
+        if (styled.has(extension)) assert.ok(cached.has(`${cdn}aellux.ext.${extension}.css`), `${snippet.id}: stylesheet ${extension}`);
       }
     }
-    for (const adapter of ["point", "keyboard"]) assert.ok(cached.has(`${cdn}aellux.input.${adapter}.min.js`));
+    for (const adapter of ["point", "keyboard"]) assert.ok(cached.has(`${cdn}aellux.input.${adapter}.js`));
     for (const url of urls) {
       if (url.startsWith(cdn)) continue;
       assert.ok(url.startsWith(site), url);
@@ -61,11 +61,11 @@ test("offline worker serves allowlisted cross-origin CDN requests without interc
     handlers.get("fetch")({ request: { url, method: "GET", mode: "cors", headers: new Headers(), ...overrides }, respondWith(value) { response = value; } });
     return response;
   }
-  assert.equal(await request(`${cdn}aellux.min.js`), cachedResponse);
-  assert.equal(await request(`${cdn}aellux.ext.focus.min.js`), cachedResponse);
+  assert.equal(await request(`${cdn}aellux.js`), cachedResponse);
+  assert.equal(await request(`${cdn}aellux.ext.focus.js`), cachedResponse);
   assert.equal(request(`${cdn}unlisted.js`), undefined);
   assert.equal(request("https://other.test/script.js"), undefined);
-  assert.equal(request(`${cdn}aellux.min.js`, { headers: new Headers({ authorization: "private" }) }), undefined);
-  assert.equal(request(`${cdn}aellux.min.js`, { method: "POST" }), undefined);
+  assert.equal(request(`${cdn}aellux.js`, { headers: new Headers({ authorization: "private" }) }), undefined);
+  assert.equal(request(`${cdn}aellux.js`, { method: "POST" }), undefined);
   assert.equal(request("https://library.test/index.htm", { mode: "navigate" }), undefined);
 });

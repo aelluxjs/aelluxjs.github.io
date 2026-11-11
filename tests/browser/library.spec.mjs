@@ -398,7 +398,7 @@ for (const lateMount of [false, true]) {
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.route("**/tests/sidebar-embed.htm", route => route.fulfill({ contentType: "text/html; charset=utf-8", body: `<!doctype html>
       <html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{margin:0}#host{width:390px;max-width:100%}</style>
-      <script src="https://cdn.jsdelivr.net/gh/aelluxjs/core@release%2F0.1.0/dist/aellux.min.js"></script><script>$ae.ext("present",{loadStyle:true});$ae.ext("adaptive",{loadStyle:true});$ae.ext("focus");$ae.init({mode:"basic",useHash:false});</script></head>
+      <script src="https://cdn.jsdelivr.net/gh/aelluxjs/core@af06c0fae0fb0d0364f0c77a8cd3ad423539d961/dist/aellux.js"></script><script>$ae.ext("present",{loadStyle:true});$ae.ext("adaptive",{loadStyle:true});$ae.ext("focus");$ae.init({mode:"basic",useHash:false});</script></head>
       <body><nav id="host-navigation"><a href="#host">Host navigation</a></nav><button id="host-button">Host control</button><div id="host">${lateMount ? "" : sidebarSource}</div></body></html>` }));
     await page.goto("/tests/sidebar-embed.htm");
     if (lateMount) {

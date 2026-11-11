@@ -253,7 +253,7 @@ test("inline head initialization publishes preferences early and loads Full only
     const assets = [];
     const recordAsset = request => {
       const url = new URL(request.url());
-      if (request.frame() === page.mainFrame() && url.href.startsWith("https://cdn.jsdelivr.net/gh/aelluxjs/core@release%2F0.1.0/dist/")) {
+      if (request.frame() === page.mainFrame() && url.href.startsWith("https://cdn.jsdelivr.net/gh/aelluxjs/core@af06c0fae0fb0d0364f0c77a8cd3ad423539d961/dist/")) {
         assets.push(url.pathname.split("/").pop().replace(".min.", "."));
       }
     };
@@ -737,10 +737,11 @@ test("homepage embeds four themed demos and displays the exact runnable source",
   await expect(page.locator('link[data-ae-dep="highlightjs-css"]')).toHaveJSProperty("disabled", false);
   for (const width of [320, 375, 768, 1440]) {
     await page.setViewportSize({ width, height: 960 });
-    expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+    // Anchor and Scrollbox update their geometry through waitLayout after resize.
+    await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   }
   await page.evaluate(() => document.documentElement.style.fontSize = "200%");
-  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   const scripts = await page.evaluate(() => [...document.scripts].map(script => script.src));
   expect(scripts.some(src => src.includes("bootstrap") && src.endsWith(".js"))).toBe(false);
 });

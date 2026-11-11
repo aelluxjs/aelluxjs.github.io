@@ -1,10 +1,10 @@
 /* Application-owned worker: the public runtime is outside the app's URL scope.
    Keep this explicit list aligned with snippets.js; bump VERSION on deployment. */
-const VERSION = "9";
+const VERSION = "10";
 const PREFIX = `aellux-library:${self.registration.scope}:`;
 const CACHE = PREFIX + VERSION;
 const app = path => new URL(path, self.registration.scope).href;
-const dist = file => new URL(file, "https://cdn.jsdelivr.net/gh/aelluxjs/core@release%2F0.1.0/dist/").href;
+const dist = file => new URL(file, "https://cdn.jsdelivr.net/gh/aelluxjs/core@af06c0fae0fb0d0364f0c77a8cd3ad423539d961/dist/").href;
 const extensions = ["input", "present", "adaptive", "scrollbox", "scrollbox-snap", "viewport", "preference", "focus", "anchor", "feedback", "state-navigation", "pwa"];
 const styled = ["input", "present", "adaptive", "scrollbox", "anchor", "feedback"];
 const PRECACHE = [
@@ -12,9 +12,9 @@ const PRECACHE = [
   "assets/icon.svg", "assets/icon-192.png", "assets/icon-512.png", "assets/geist-latin.woff2", "vendor/bootstrap.min.css",
   "../assets/bootstrap-brand.css"
 ].map(app).concat(
-  ["aellux.min.js", "aellux.full.min.js", "aellux.full.min.css", "aellux.orchestrator.min.js", "aellux.extensions.min.json", "aellux.input.point.min.js", "aellux.input.keyboard.min.js"].map(dist),
-  extensions.map(name => dist(`aellux.ext.${name}.min.js`)),
-  styled.map(name => dist(`aellux.ext.${name}.min.css`))
+  ["aellux.js", "aellux.full.js", "aellux.full.css", "aellux.orchestrator.js", "aellux.extensions.min.json", "aellux.input.point.js", "aellux.input.keyboard.js"].map(dist),
+  extensions.map(name => dist(`aellux.ext.${name}.js`)),
+  styled.map(name => dist(`aellux.ext.${name}.css`))
 );
 const allowed = new Set(PRECACHE);
 
