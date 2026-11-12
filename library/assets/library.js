@@ -113,7 +113,7 @@
     `<button class="btn category-chip" type="button" data-category="${escapeHTML(item.id)}" aria-pressed="${item.id === category}">${escapeHTML(item.label)}</button>`).join("");
   document.getElementById("category-grid").innerHTML = source.categories.map(item => {
     const count = source.snippets.filter(snippet => snippet.category === item.id).length;
-    return `<div class="col-6"><button class="category-tile h-100" type="button" data-category="${escapeHTML(item.id)}" data-open-category>
+    return `<div class="col-6"><button class="category-tile h-100" type="button" draggable="false" data-category="${escapeHTML(item.id)}" data-open-category>
       <span class="snippet-avatar mb-3" style="--snippet-tint:${escapeHTML(item.tint)}" aria-hidden="true">${escapeHTML(item.symbol)}</span>
       <span class="d-block fw-semibold small mb-1">${escapeHTML(item.label)}</span><span class="d-block small text-body-secondary">${escapeHTML(item.description)}</span>
       <span class="d-block small text-body-secondary mt-2">${count} ${count === 1 ? "snippet" : "snippets"}</span>
@@ -160,9 +160,7 @@
       query = "";
       search.value = "";
     }
-    document.getElementById("view-title").textContent = { feed: "Copy, paste, customize.", categories: "O que você quer construir?", saved: "Seus snippets favoritos." }[view];
     pages.forEach(page => { page.inert = page.dataset.libraryView !== view; });
-    document.querySelector(".search-panel").hidden = view === "categories";
     document.querySelectorAll("[data-view]").forEach(button => {
       if (button.dataset.view === view) button.setAttribute("aria-current", "page");
       else button.removeAttribute("aria-current");
@@ -322,7 +320,7 @@
       state.shell.setAttribute("role", "dialog");
       state.shell.setAttribute("aria-modal", "true");
       state.shell.setAttribute("aria-label", state.snippet.title);
-      const background = document.querySelectorAll(".app-header, .bottom-nav, .app-layout aside, #main > :not(#library-views), .snippet-card");
+      const background = document.querySelectorAll(".app-header, .bottom-nav, .app-layout aside, .library-tabs, .feed-intro, .search-panel, .snippet-card");
       for (const element of [...background, ...state.card.querySelectorAll(".snippet-header, .snippet-footer")]) {
         if (element === state.card || element.inert) continue;
         element.inert = true;
@@ -442,7 +440,7 @@
       category = selected;
       filter();
     }
-    if (button.dataset.tag) { search.value = query = button.dataset.tag; filter(); search.focus({ preventScroll: true }); }
+    if (button.dataset.tag) { selectView("feed"); search.value = query = button.dataset.tag; filter(); search.focus({ preventScroll: true }); }
     const action = button.dataset.action;
     if (action === "explore") selectView("feed");
     if (action === "install") { install(); return; }
