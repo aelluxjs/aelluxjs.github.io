@@ -10,6 +10,8 @@
   const cards = new Map();
   const assets = new Map();
   const feed = document.getElementById("feed");
+  const views = document.getElementById("library-views");
+  const pages = [...views.querySelectorAll("[data-library-view]")];
   const search = document.getElementById("search");
   const storageKey = "aellux-library-v1";
   const previewWidths = { fluid: null, mobile: 375, tablet: 768, desktop: 1280 };
@@ -50,17 +52,17 @@
   }
 
   // Altere este template para mudar a estrutura de todos os cards de uma vez.
-  function renderCard(snippet) {
+  function renderCard(snippet, key = snippet.id) {
     const group = categories.get(snippet.category);
     const requirements = [...snippet.extensions.map(name => extensionLabels[name] || name), ...(snippet.dependencies || [])];
-    return `<article class="snippet-card" id="snippet-${escapeHTML(snippet.id)}" data-snippet="${escapeHTML(snippet.id)}" style="--snippet-tint:${escapeHTML(group.tint)}" aria-labelledby="title-${escapeHTML(snippet.id)}">
+    return `<article class="snippet-card" id="snippet-${escapeHTML(key)}" data-snippet="${escapeHTML(key)}" style="--snippet-tint:${escapeHTML(group.tint)}" aria-labelledby="title-${escapeHTML(key)}">
       <header class="snippet-header">
         <div class="d-flex align-items-center gap-2 mb-3">
           <span class="snippet-avatar" aria-hidden="true">${escapeHTML(group.symbol)}</span>
           <div><span class="d-block small fw-medium">aellux<span class="text-body-secondary">.js</span></span><span class="d-block text-body-secondary" style="font-size:.65rem">${escapeHTML(group.label)} · snippet</span></div>
           <button class="btn icon-button save-button ms-auto" type="button" data-action="save" aria-label="Salvar ${escapeHTML(snippet.title)}" aria-pressed="false">${icon("bookmark")}</button>
         </div>
-        <h3 id="title-${escapeHTML(snippet.id)}" class="mb-2">${escapeHTML(snippet.title)}</h3>
+        <h3 id="title-${escapeHTML(key)}" class="mb-2">${escapeHTML(snippet.title)}</h3>
         <p class="snippet-description text-body-secondary mb-2">${escapeHTML(snippet.description)}</p>
         <div class="d-flex flex-wrap gap-2">${snippet.tags.map(tag => `<button class="tag" type="button" data-tag="${escapeHTML(tag)}">#${escapeHTML(tag)}</button>`).join("")}</div>
         <div class="snippet-requirements d-flex flex-wrap gap-1 mt-3" aria-label="Dependências">${(requirements.length ? requirements : ["HTML / CSS"]).map(name => `<span class="badge border text-body-secondary fw-normal">${escapeHTML(name)}</span>`).join("")}</div>
@@ -94,13 +96,17 @@
     </article>`;
   }
 
-  feed.innerHTML = source.snippets.map(renderCard).join("");
-  for (const snippet of source.snippets) {
-    const card = document.getElementById(`snippet-${snippet.id}`);
-    cards.set(snippet.id, {
-      snippet, card, slot: card.querySelector(".preview-slot"), shell: card.querySelector(".preview-shell"),
-      frame: card.querySelector("iframe"), visible: false, revision: 0, loaded: false, loading: false, token: null, exportHead: null
-    });
+  for (const panel of ["feed", "saved"]) {
+    const container = panel === "feed" ? feed : document.getElementById("saved-feed");
+    container.innerHTML = source.snippets.map(snippet => renderCard(snippet, panel === "feed" ? snippet.id : `saved:${snippet.id}`)).join("");
+    for (const snippet of source.snippets) {
+      const key = panel === "feed" ? snippet.id : `saved:${snippet.id}`;
+      const card = document.getElementById(`snippet-${key}`);
+      cards.set(key, {
+        key, panel, snippet, card, slot: card.querySelector(".preview-slot"), shell: card.querySelector(".preview-shell"),
+        frame: card.querySelector("iframe"), visible: false, revision: 0, loaded: false, loading: false, token: null, exportHead: null
+      });
+    }
   }
 
   document.getElementById("category-filters").innerHTML = [{ id: "all", label: "Tudo" }, ...source.categories].map(item =>
@@ -126,17 +132,19 @@
 
   function filter() {
     const terms = normalize(query).split(/\s+/).filter(Boolean);
-    let count = 0;
+    const counts = { feed: 0, saved: 0 };
     for (const state of cards.values()) {
       const snippet = state.snippet;
       const haystack = normalize([snippet.title, snippet.description, categories.get(snippet.category).label, ...snippet.tags, ...snippet.extensions, ...snippet.dependencies, ...snippet.features].join(" "));
-      const match = (view !== "saved" || saved.has(snippet.id)) && (category === "all" || snippet.category === category) && terms.every(term => haystack.includes(term));
+      const match = (state.panel !== "saved" || saved.has(snippet.id)) && (category === "all" || snippet.category === category) && terms.every(term => haystack.includes(term));
       state.card.hidden = !match;
-      if (match) count++;
+      if (match) counts[state.panel]++;
       else pause(state);
     }
+    const count = counts[view] ?? source.categories.length;
+    document.getElementById("saved-empty").hidden = counts.saved > 0;
     document.getElementById("results").textContent = `${count} ${count === 1 ? "exemplo para experimentar" : "exemplos para experimentar"}${query ? ` · “${query}”` : ""}`;
-    document.getElementById("empty-state").hidden = count > 0;
+    document.getElementById("empty-state").hidden = counts.feed > 0;
     document.getElementById("empty-message").textContent = view === "saved" ? "Salve os exemplos pelo ícone de marcador para encontrá-los aqui." : "Experimente outra busca ou escolha uma categoria diferente.";
     document.getElementById("clear-filters").hidden = !query && category === "all";
     document.querySelectorAll(".category-chip").forEach(button => button.setAttribute("aria-pressed", String(button.dataset.category === category)));
@@ -144,19 +152,36 @@
   }
 
   function selectView(next, scroll = true) {
+    if (!pages.some(page => page.dataset.libraryView === next)) return;
+    const changed = view !== next;
     view = next;
-    category = "all";
-    query = "";
-    search.value = "";
+    if (changed) {
+      category = "all";
+      query = "";
+      search.value = "";
+    }
     document.getElementById("view-title").textContent = { feed: "Copy, paste, customize.", categories: "O que você quer construir?", saved: "Seus snippets favoritos." }[view];
-    document.getElementById("categories-panel").hidden = view !== "categories";
+    pages.forEach(page => { page.inert = page.dataset.libraryView !== view; });
+    document.querySelector(".search-panel").hidden = view === "categories";
     document.querySelectorAll("[data-view]").forEach(button => {
       if (button.dataset.view === view) button.setAttribute("aria-current", "page");
       else button.removeAttribute("aria-current");
     });
     filter();
-    if (scroll) window.scrollTo({ top: 0, behavior: "instant" });
+    refreshVisibility();
+    if (scroll) {
+      const index = pages.findIndex(page => page.dataset.libraryView === view);
+      const behavior = matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth";
+      const result = $ae.comm.request("scrollbox-snap.goto", { element: views, index, behavior });
+      if (!result.handled || !result.value) views.scrollTo({ left: index * views.clientWidth, behavior });
+    }
   }
+
+  $ae.on("ScrollboxSnapChange", event => {
+    if (event.target !== views) return;
+    const next = event.detail.item?.dataset.libraryView;
+    if (next && next !== view) selectView(next, false);
+  });
 
   function fetchText(url) {
     const key = String(url);
@@ -179,7 +204,7 @@
   });
 
   function shouldRun(state) {
-    return !document.hidden && !state.card.hidden && (fullscreen ? fullscreen === state.snippet.id : state.visible);
+    return !document.hidden && !state.card.hidden && (fullscreen ? fullscreen === state.key : state.panel === view && state.visible);
   }
 
   function replaceFrame(state, html) {
@@ -297,7 +322,7 @@
       state.shell.setAttribute("role", "dialog");
       state.shell.setAttribute("aria-modal", "true");
       state.shell.setAttribute("aria-label", state.snippet.title);
-      const background = document.querySelectorAll(".app-header, .bottom-nav, .app-layout aside, #main > :not(#feed), .snippet-card");
+      const background = document.querySelectorAll(".app-header, .bottom-nav, .app-layout aside, #main > :not(#library-views), .snippet-card");
       for (const element of [...background, ...state.card.querySelectorAll(".snippet-header, .snippet-footer")]) {
         if (element === state.card || element.inert) continue;
         element.inert = true;
@@ -432,7 +457,7 @@
     if (action === "expand") {
       if (!navigation) return;
       returnFocus = button;
-      try { await navigation.setState("preview", state.snippet.id, state.snippet.title); }
+      try { await navigation.setState("preview", state.key, state.snippet.title); }
       catch { notify("Não foi possível abrir a prévia ampliada."); }
     }
     if (action === "codepen") openCodePen(state);

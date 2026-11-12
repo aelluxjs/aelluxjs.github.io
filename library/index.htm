@@ -72,11 +72,9 @@
             <button id="clear-filters" class="btn btn-link btn-sm text-body-secondary p-0" type="button" hidden>Limpar filtros</button>
           </div>
         </div>
-        <section id="categories-panel" class="mb-4" aria-labelledby="categories-title" hidden>
-          <h3 id="categories-title" class="h5 mb-3">O que você quer construir?</h3>
-          <div id="category-grid" class="row g-3"></div>
-        </section>
-        <div id="feed" class="d-grid gap-4" tabindex="-1" aria-label="Feed de exemplos"></div>
+        <div id="library-views" class="library-views" data-ae-scrollbox="pointer" data-ae-scrollbox-snap="horizontal" data-ae-scrollbox-fade="false" data-ae-scrollbar="none" aria-label="Se??es da biblioteca">
+          <section class="library-page" data-library-view="feed" data-ae-snap-item="start" aria-label="Explorar" >
+            <div class="library-scroll" data-ae-scrollbox="pointer" data-ae-scrollbox-fade="false" tabindex="0" aria-label="Explorar">        <div id="feed" class="d-grid gap-4" tabindex="-1" aria-label="Feed de exemplos"></div>
         <div id="empty-state" class="text-center border rounded-4 p-5 my-4" hidden>
           <svg class="icon mb-3" aria-hidden="true"><use href="#i-search"></use></svg>
           <h3 class="h5">Nenhum snippet por aqui.</h3>
@@ -84,6 +82,22 @@
           <button class="btn btn-outline-secondary btn-sm" type="button" data-action="explore">Explorar todos</button>
         </div>
         <p class="feed-end text-center text-body-secondary small py-4 mb-0">Pronto para incorporar. Livre para transformar. <span aria-hidden="true">✳</span></p>
+
+            </div>
+          </section>
+          <section class="library-page" data-library-view="categories" data-ae-snap-item="start" aria-label="Categorias" inert>
+            <div class="library-scroll" data-ae-scrollbox="pointer" data-ae-scrollbox-fade="false" tabindex="0" aria-label="Categorias">        <section id="categories-panel" class="mb-4" aria-labelledby="categories-title">
+          <h3 id="categories-title" class="h5 mb-3">O que você quer construir?</h3>
+          <div id="category-grid" class="row g-3"></div>
+        </section>
+
+            </div>
+          </section>
+          <section class="library-page" data-library-view="saved" data-ae-snap-item="start" aria-label="Meus salvos" inert>
+            <div class="library-scroll" data-ae-scrollbox="pointer" data-ae-scrollbox-fade="false" tabindex="0" aria-label="Meus salvos"><div id="saved-feed" class="d-grid gap-4"></div><div id="saved-empty" class="text-center border rounded-4 p-5 my-4" hidden><h3 class="h5">Nenhum snippet por aqui.</h3><p class="small text-body-secondary">Salve exemplos pelo marcador ou ajuste os filtros.</p><button class="btn btn-outline-secondary btn-sm" type="button" data-action="explore">Explorar todos</button></div>
+            </div>
+          </section>
+        </div>
       </main>
 
       <aside class="col-xl-3 d-none d-xl-block">
