@@ -10,7 +10,7 @@ button, a, input { touch-action: manipulation; }
 .brand { display: inline-flex; align-items: center; gap: .3em; font: 650 1.5rem/1 "Geist", var(--bs-font-sans-serif); letter-spacing: -.05em; white-space: nowrap; }
 .brand-mark { display: block; width: 1em; height: 1em; flex-shrink: 0; }
 .brand-mark rect { fill: var(--bs-warning); }
-.brand-mark text { fill: var(--bs-dark); font: 650 64px "Geist", sans-serif; text-anchor: middle; letter-spacing: 0; }
+.brand-mark path { fill: var(--bs-dark); }
 .brand-suffix { font-weight: 400; }
 .header-label { letter-spacing: .015em; }
 .icon-button { display: inline-grid; place-items: center; width: 2.25rem; height: 2.25rem; border-radius: 50%; padding: 0; }

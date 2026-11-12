@@ -57,6 +57,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist:wght@400..700&amp;display=swap">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
     integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="assets/home.css">
   <script src="assets/home.js" defer></script>
 </head>
@@ -301,120 +302,15 @@ aelluxJs.attr("preference");</code></pre>
     <section id="examples" data-ae-viewport="y" class="section-space bg-body-tertiary border-bottom"
       aria-labelledby="examples-title">
       <div class="container">
-        <div class="row align-items-end g-3 mb-5">
+        <div class="row align-items-center g-4">
           <div class="col-lg-7">
-            <p class="eyebrow text-body-secondary">02 <span class="opacity-50" aria-hidden="true">▪</span> In practice
-            </p>
-            <h2 id="examples-title" class="section-title mb-0">Less wiring.<br>More experience.</h2>
+            <p class="eyebrow text-body-secondary">02 <span class="opacity-50" aria-hidden="true">&#9642;</span> In practice</p>
+            <h2 id="examples-title" class="section-title mb-0">Explore the App Library.</h2>
           </div>
           <div class="col-lg-5">
-            <p class="text-body-secondary mb-0">Four small experiences, built from the primitives included in Full. Explore the previews, inspect the
-              complete source, then compose your own.</p>
+            <p class="text-body-secondary mb-4">Try ready-to-use examples, explore responsive previews and open each one in CodePen to make it your own.</p>
+            <a class="btn btn-warning fw-normal px-4 py-2" href="library/index.htm">Open App Library <span class="ms-2" aria-hidden="true">&#8599;</span></a>
           </div>
-        </div>
-        <div class="row g-4">
-          <article class="col-lg-6" aria-labelledby="carousel-title">
-            <div class="example-card bg-body border rounded-3 h-100">
-              <div class="p-4 pb-3">
-                <p class="eyebrow text-body-secondary mb-2">01 <span class="opacity-50" aria-hidden="true">▪</span>
-                  Scrollbox + Viewport + Input + Present</p>
-                <h3 id="carousel-title" class="h4">Places to Pause</h3>
-                <p class="text-body-secondary mb-0">A weekend gallery with drag and swipe exploration, reactive cards and
-                  field notes that open in place.</p>
-              </div>
-              <iframe class="example-frame" src="examples/carousel.htm" title="Places to Pause live example"
-                loading="lazy"></iframe>
-              <div class="example-source border-top px-4 py-3" data-example-source="carousel">
-                <button type="button" class="source-toggle" data-ae-present-trigger="toggle"
-                  data-ae-present-target="#source-panel-carousel" aria-expanded="false"
-                  aria-controls="source-panel-carousel">Source <span class="opacity-50" aria-hidden="true">▪</span>
-                  <span class="text-body-secondary small">HTML, CSS &amp; JavaScript</span></button>
-              </div>
-              <div class="example-footer border-top px-4 py-3 d-flex flex-wrap justify-content-between gap-2 small">
-                <span class="text-body-secondary">Preview → Source → Documentation</span>
-                <div class="d-flex gap-3"><a href="https://aelluxjs.github.io/core/docs/0.1.x/core-extensions/scrollbox.htm">Scrollbox <span
-                      aria-hidden="true">↗</span></a><a href="https://aelluxjs.github.io/core/docs/0.1.x/core-extensions/present.htm">Present
-                    <span aria-hidden="true">↗</span></a></div>
-              </div>
-            </div>
-          </article>
-          <article class="col-lg-6" aria-labelledby="viewport-title">
-            <div class="example-card bg-body border rounded-3 h-100">
-              <div class="p-4 pb-3">
-                <p class="eyebrow text-body-secondary mb-2">02 <span class="opacity-50" aria-hidden="true">▪</span>
-                  Viewport + Scrollbox + Preference
-                  <span class="badge text-body border ms-1">Unstable</span>
-                </p>
-                <h3 id="viewport-title" class="h4">A Little Space</h3>
-                <p class="text-body-secondary mb-0">A horizontal visual story with layered motion and a motion preference
-                  you can change as you explore.</p>
-              </div>
-              <iframe class="example-frame" src="examples/viewport.htm" title="A Little Space live example"
-                loading="lazy"></iframe>
-              <div class="example-source border-top px-4 py-3" data-example-source="viewport">
-                <button type="button" class="source-toggle" data-ae-present-trigger="toggle"
-                  data-ae-present-target="#source-panel-viewport" aria-expanded="false"
-                  aria-controls="source-panel-viewport">Source <span class="opacity-50" aria-hidden="true">▪</span>
-                  <span class="text-body-secondary small">HTML &amp; CSS</span></button>
-              </div>
-              <div class="example-footer border-top px-4 py-3 d-flex flex-wrap justify-content-between gap-2 small">
-                <span class="text-body-secondary">Preview → Source → Documentation</span><a
-                  href="https://aelluxjs.github.io/core/docs/0.1.x/core-extensions/viewport.htm">Viewport <span
-                    aria-hidden="true">↗</span></a>
-              </div>
-            </div>
-          </article>
-          <article class="col-lg-6" aria-labelledby="floating-title">
-            <div class="example-card bg-body border rounded-3 h-100">
-              <div class="p-4 pb-3">
-                <p class="eyebrow text-body-secondary mb-2">03 <span class="opacity-50" aria-hidden="true">▪</span>
-                  Anchor + Present + Input + Focus</p>
-                <h3 id="floating-title" class="h4">Make It Yours</h3>
-                <p class="text-body-secondary mb-0">Edit a workspace in a panel that follows its card, finds room and
-                  restores focus when you close it.</p>
-              </div>
-              <iframe class="example-frame" src="examples/floating.htm" title="Make It Yours live example"
-                loading="lazy"></iframe>
-              <div class="example-source border-top px-4 py-3" data-example-source="floating">
-                <button type="button" class="source-toggle" data-ae-present-trigger="toggle"
-                  data-ae-present-target="#source-panel-floating" aria-expanded="false"
-                  aria-controls="source-panel-floating">Source <span class="opacity-50" aria-hidden="true">▪</span>
-                  <span class="text-body-secondary small">HTML, CSS &amp; JavaScript</span></button>
-              </div>
-              <div class="example-footer border-top px-4 py-3 d-flex flex-wrap justify-content-between gap-2 small">
-                <span class="text-body-secondary">Preview → Source → Documentation</span>
-                <div class="d-flex gap-3"><a href="https://aelluxjs.github.io/core/docs/0.1.x/core-extensions/anchor.htm">Anchor <span
-                      aria-hidden="true">↗</span></a><a href="https://aelluxjs.github.io/core/docs/0.1.x/core-extensions/present.htm">Present <span
-                      aria-hidden="true">↗</span></a></div>
-              </div>
-            </div>
-          </article>
-          <article class="col-lg-6" aria-labelledby="navigation-title">
-            <div class="example-card bg-body border rounded-3 h-100">
-              <div class="p-4 pb-3">
-                <p class="eyebrow text-body-secondary mb-2">04 <span class="opacity-50" aria-hidden="true">▪</span>
-                  Present + Focus + Adaptive + Preference + State Navigation + Feedback</p>
-                <h3 id="navigation-title" class="h4">Your Next Big Idea</h3>
-                <p class="text-body-secondary mb-0">A local setup flow with keyboard-friendly fields, a resizable preview,
-                  shared preferences and browser history.</p>
-              </div>
-              <iframe class="example-frame" src="examples/navigation.htm" title="Your Next Big Idea live example"
-                loading="lazy"></iframe>
-              <div class="example-source border-top px-4 py-3" data-example-source="navigation">
-                <button type="button" class="source-toggle" data-ae-present-trigger="toggle"
-                  data-ae-present-target="#source-panel-navigation" aria-expanded="false"
-                  aria-controls="source-panel-navigation">Source <span class="opacity-50" aria-hidden="true">▪</span>
-                  <span class="text-body-secondary small">HTML, CSS &amp; JavaScript</span></button>
-              </div>
-              <div class="example-footer border-top px-4 py-3 d-flex flex-wrap justify-content-between gap-2 small">
-                <span class="text-body-secondary">Preview → Source → Documentation</span>
-                <div class="d-flex flex-wrap gap-3"><a href="https://aelluxjs.github.io/core/docs/0.1.x/core-extensions/adaptive.htm">Adaptive <span aria-hidden="true">↗</span></a><a
-                    href="https://aelluxjs.github.io/core/docs/0.1.x/core-extensions/state-navigation.htm">State Navigation <span
-                      aria-hidden="true">↗</span></a><a href="https://aelluxjs.github.io/core/docs/0.1.x/core-extensions/feedback.htm">Feedback <span
-                      aria-hidden="true">↗</span></a></div>
-              </div>
-            </div>
-          </article>
         </div>
       </div>
     </section>
@@ -856,14 +752,14 @@ aelluxJs.attr("preference");</code></pre>
         <p class="text-body-secondary">The æ symbol pairs <span class="text-bg-warning">warning yellow</span> with
           graphite lettering (#232323), just like the mark above. Dark mode uses JavaScript yellow (#F7DF1E);
           light mode keeps <a href="https://getbootstrap.com/" target="_blank" rel="noopener">Bootstrap</a> warning yellow (#FFC107).
-          The logotype uses Geist from Google Fonts: a 650-weight name and a lighter, 400-weight
+          The outlined logotype is based on Geist: a 650-weight name and a lighter, 400-weight
           <span class="text-nowrap">.js</span> suffix. Its text follows the same light or dark color as the page.
         </p>
         <p class="text-body-secondary">Keep clear space of at least one quarter of the symbol’s width around the
           brand. Both variants include this transparent margin for composition. The SVGs default to light and adapt
           automatically to the Bootstrap or aellux.js dark theme.</p>
         <p class="text-body-secondary mb-5">Download the symbol or the symbol with logotype as SVG or PNG.
-          Exports preserve the current colors, Geist typography and transparent clear space; the SVG includes its font.
+          Exports preserve the current colors, Geist outlines and transparent clear space; the SVG needs no font.
         </p>
         <div class="row g-4">
           <article class="col-md-5">
@@ -872,36 +768,16 @@ aelluxJs.attr("preference");</code></pre>
               <div class="d-flex align-items-center justify-content-center py-4">
                 <svg id="brand-symbol" class="mw-100" xmlns="http://www.w3.org/2000/svg" width="384" height="384"
                   viewBox="-32 -32 192 192" role="img" aria-label="aellux.js symbol">
+                  <!-- Geist outlines: Copyright 2024 The Geist Project Authors, SIL OFL 1.1. -->
                   <style>
-                    @font-face {
-                      font-family: "Geist";
-                      font-style: normal;
-                      font-weight: 400 700;
-                      font-display: swap;
-                      src: url("https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwcGFU.woff2") format("woff2");
-                    }
-
-                    #brand-symbol {
-                      user-select: none;
-                    }
-
-                    #brand-symbol .ae-brand-tile {
-                      fill: var(--bs-warning, #ffc107);
-                    }
-
+                    #brand-symbol { user-select: none; }
+                    #brand-symbol .ae-brand-tile { fill: var(--bs-warning, #ffc107); }
                     [data-bs-theme="dark"] #brand-symbol .ae-brand-tile,
-                    [data-ae-color-scheme="dark"] #brand-symbol .ae-brand-tile {
-                      fill: #F7DF1E;
-                    }
-
-                    #brand-symbol .ae-brand-glyph {
-                      fill: var(--bs-dark, #232323);
-                      font: 650 64px "Geist", sans-serif;
-                      text-anchor: middle;
-                    }
+                    [data-ae-color-scheme="dark"] #brand-symbol .ae-brand-tile { fill: #F7DF1E; }
+                    #brand-symbol .ae-brand-glyph { fill: var(--bs-dark, #232323); }
                   </style>
                   <rect class="ae-brand-tile" width="128" height="128" rx="1" />
-                  <text class="ae-brand-glyph" x="64" y="84">æ</text>
+                  <path class="ae-brand-glyph" transform="translate(33.536 84) scale(0.064 -0.064)" d="M226 -12Q144 -12 91 25.5Q38 63 38 134Q38 186 60 219Q82 252 122 271Q162 290 213 299L388 329Q387 387 363 415Q339 443 290 443Q245 443 220 421Q195 399 188 363L47 369Q63 455 125.5 501Q188 547 289 547Q405 547 467.5 490Q530 433 527 316L464 159Q452 104 420 65.5Q388 27 338.5 7.5Q289 -12 226 -12ZM268 85Q304 87 330.5 101.5Q357 116 372.5 144Q388 172 388 213L388 238L258 216Q216 209 199 191Q182 173 182 147Q182 116 202.5 99.5Q223 83 268 85ZM658 -12Q577 -12 517 22.5Q457 57 424.5 120Q392 183 392 268Q392 352 424.5 414.5Q457 477 516.5 512Q576 547 656 547Q734 547 792.5 512.5Q851 478 882.5 413.5Q914 349 914 259L914 229L536 229Q540 163 573 129.5Q606 96 660 96Q701 96 727.5 114Q754 132 765 166L907 157Q885 78 819 33Q753 -12 658 -12ZM536 319L771 319Q767 380 736 410.5Q705 441 656 441Q607 441 575 409Q543 377 536 319Z"/>
                 </svg>
               </div>
               <div class="d-flex gap-2 flex-wrap">
@@ -919,52 +795,22 @@ aelluxJs.attr("preference");</code></pre>
               <div class="d-flex align-items-center justify-content-center py-4 my-auto">
                 <svg id="brand-logotype" class="mw-100" xmlns="http://www.w3.org/2000/svg" width="904"
                   viewBox="-32 -32 452 192" role="img" aria-label="aellux.js symbol with logotype">
+                  <!-- Geist outlines: Copyright 2024 The Geist Project Authors, SIL OFL 1.1. -->
                   <style>
-                    @font-face {
-                      font-family: "Geist";
-                      font-style: normal;
-                      font-weight: 400 700;
-                      font-display: swap;
-                      src: url("https://fonts.gstatic.com/s/geist/v5/gyByhwUxId8gMEwcGFU.woff2") format("woff2");
-                    }
-
-                    #brand-logotype {
-                      user-select: none;
-                    }
-
-                    #brand-logotype .ae-brand-tile {
-                      fill: var(--bs-warning, #ffc107);
-                    }
-
+                    #brand-logotype { user-select: none; }
+                    #brand-logotype .ae-brand-tile { fill: var(--bs-warning, #ffc107); }
                     [data-bs-theme="dark"] #brand-logotype .ae-brand-tile,
-                    [data-ae-color-scheme="dark"] #brand-logotype .ae-brand-tile {
-                      fill: #F7DF1E;
-                    }
-
-                    #brand-logotype .ae-brand-glyph {
-                      fill: var(--bs-dark, #232323);
-                      font: 650 40px "Geist", sans-serif;
-                      text-anchor: middle;
-                    }
-
-                    #brand-logotype .ae-brand-word {
-                      fill: var(--bs-body-color, #232323);
-                      font: 650 80px "Geist", sans-serif;
-                      letter-spacing: -4px;
-                    }
-
-                    #brand-logotype .ae-brand-suffix {
-                      font-weight: 400;
-                    }
-
+                    [data-ae-color-scheme="dark"] #brand-logotype .ae-brand-tile { fill: #F7DF1E; }
+                    #brand-logotype .ae-brand-glyph { fill: var(--bs-dark, #232323); }
+                    #brand-logotype .ae-brand-word, #brand-logotype .ae-brand-suffix { fill: var(--bs-body-color, #232323); }
                     [data-bs-theme="dark"] #brand-logotype .ae-brand-word,
-                    [data-ae-color-scheme="dark"] #brand-logotype .ae-brand-word {
-                      fill: var(--bs-body-color, #dee2e6);
-                    }
+                    [data-bs-theme="dark"] #brand-logotype .ae-brand-suffix,
+                    [data-ae-color-scheme="dark"] #brand-logotype .ae-brand-word,
+                    [data-ae-color-scheme="dark"] #brand-logotype .ae-brand-suffix { fill: var(--bs-body-color, #dee2e6); }
                   </style>
                   <rect class="ae-brand-tile" y="24" width="80" height="80" rx="1" />
-                  <text class="ae-brand-glyph" x="40" y="76.5">æ</text>
-                  <text class="ae-brand-word" x="104" y="88">ællux<tspan class="ae-brand-suffix">.js</tspan></text>
+                  <path class="ae-brand-glyph" transform="translate(20.96 76.5) scale(0.04 -0.04)" d="M226 -12Q144 -12 91 25.5Q38 63 38 134Q38 186 60 219Q82 252 122 271Q162 290 213 299L388 329Q387 387 363 415Q339 443 290 443Q245 443 220 421Q195 399 188 363L47 369Q63 455 125.5 501Q188 547 289 547Q405 547 467.5 490Q530 433 527 316L464 159Q452 104 420 65.5Q388 27 338.5 7.5Q289 -12 226 -12ZM268 85Q304 87 330.5 101.5Q357 116 372.5 144Q388 172 388 213L388 238L258 216Q216 209 199 191Q182 173 182 147Q182 116 202.5 99.5Q223 83 268 85ZM658 -12Q577 -12 517 22.5Q457 57 424.5 120Q392 183 392 268Q392 352 424.5 414.5Q457 477 516.5 512Q576 547 656 547Q734 547 792.5 512.5Q851 478 882.5 413.5Q914 349 914 259L914 229L536 229Q540 163 573 129.5Q606 96 660 96Q701 96 727.5 114Q754 132 765 166L907 157Q885 78 819 33Q753 -12 658 -12ZM536 319L771 319Q767 380 736 410.5Q705 441 656 441Q607 441 575 409Q543 377 536 319Z"/>
+                  <g transform="translate(104 88) scale(0.08 -0.08)"><g class="ae-brand-word"><path transform="translate(0 0)" d="M226 -12Q144 -12 91 25.5Q38 63 38 134Q38 186 60 219Q82 252 122 271Q162 290 213 299L388 329Q387 387 363 415Q339 443 290 443Q245 443 220 421Q195 399 188 363L47 369Q63 455 125.5 501Q188 547 289 547Q405 547 467.5 490Q530 433 527 316L464 159Q452 104 420 65.5Q388 27 338.5 7.5Q289 -12 226 -12ZM268 85Q304 87 330.5 101.5Q357 116 372.5 144Q388 172 388 213L388 238L258 216Q216 209 199 191Q182 173 182 147Q182 116 202.5 99.5Q223 83 268 85ZM658 -12Q577 -12 517 22.5Q457 57 424.5 120Q392 183 392 268Q392 352 424.5 414.5Q457 477 516.5 512Q576 547 656 547Q734 547 792.5 512.5Q851 478 882.5 413.5Q914 349 914 259L914 229L536 229Q540 163 573 129.5Q606 96 660 96Q701 96 727.5 114Q754 132 765 166L907 157Q885 78 819 33Q753 -12 658 -12ZM536 319L771 319Q767 380 736 410.5Q705 441 656 441Q607 441 575 409Q543 377 536 319Z"/><path transform="translate(897 0)" d="M202 0Q140 0 104 31.5Q68 63 68 133L68 710L207 710L207 148Q207 126 218 116Q229 106 249 106L286 106L286 0Z"/><path transform="translate(1142 0)" d="M202 0Q140 0 104 31.5Q68 63 68 133L68 710L207 710L207 148Q207 126 218 116Q229 106 249 106L286 106L286 0Z"/><path transform="translate(1389 0)" d="M244 -12Q162 -12 115 41.5Q68 95 68 191L68 535L207 535L207 224Q207 160 228 130Q249 100 292 100Q341 100 368 133Q395 166 395 230L395 535L534 535L534 0L407 0L403 151L421 146Q409 68 364 28Q319 -12 244 -12Z"/><path transform="translate(1918.5 0)" d="M46 0L237 272L52 535L201 535L320 358L435 535L587 535L403 271L593 0L444 0L322 187L198 0Z"/></g><g class="ae-brand-suffix"><path transform="translate(2507.5 0)" d="M44 0L44 113L157 113L157 0Z"/><path transform="translate(2668.5 0)" d="M-5 -150L-5 -76L38 -76Q64 -76 80 -63.5Q96 -51 96 -18L96 530L180 530L180 -22Q180 -92 149 -121Q118 -150 46 -150ZM94 613L94 711L182 711L182 613Z"/><path transform="translate(2868.5 0)" d="M273 -12Q200 -12 150.5 11Q101 34 74.5 74.5Q48 115 44 167L132 173Q140 125 171.5 96.5Q203 68 273 68Q327 68 356.5 85.5Q386 103 386 142Q386 163 376.5 177Q367 191 339 201.5Q311 212 257 222Q183 236 141 257Q99 278 82 308Q65 338 65 380Q65 451 117.5 496.5Q170 542 266 542Q336 542 380.5 517.5Q425 493 448 454Q471 415 476 372L388 366Q386 391 373 413Q360 435 334 448.5Q308 462 264 462Q207 462 180 440Q153 418 153 384Q153 358 163.5 341.5Q174 325 200.5 314.5Q227 304 273 296Q351 283 395 263Q439 243 456.5 213.5Q474 184 474 142Q474 69 417.5 28.5Q361 -12 273 -12Z"/></g></g>
                 </svg>
               </div>
               <div class="d-flex gap-2 flex-wrap">

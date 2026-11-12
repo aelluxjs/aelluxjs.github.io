@@ -698,62 +698,20 @@ test("homepage section Viewports work on a short viewport and link clicks wait f
   await expect(page.locator("#item4")).toHaveAttribute("aria-current", "location");
 });
 
-test("homepage embeds four themed demos and displays the exact runnable source", async ({ page }) => {
+test("homepage links to the App Library without embedding examples", async ({ page }) => {
   await page.goto("/index.htm");
   await expect(page.locator(".hero .eyebrow")).toContainText("UX Made Easy");
-  await expect(page.locator(".brand-mark")).toHaveCSS("font-family", /Geist/);
   await expect(page.getByRole("button", { name: "Auto", exact: true })).toHaveAttribute("aria-pressed", "true");
-  await expect(page.locator("iframe.example-frame")).toHaveCount(4);
-  await page.locator("iframe").evaluateAll(frames => frames.forEach(frame => { frame.loading = "eager"; }));
-  for (const frameElement of await page.locator("iframe").all()) {
-    const frame = await frameElement.contentFrame();
-    await expect.poll(() => frame.locator("html").getAttribute("data-ae-color-scheme")).not.toBeNull();
-    await expect(frame.locator("h1")).not.toHaveCSS("font-family", /Geist/);
-  }
+  await expect(page.locator("#examples iframe, [data-example-source]")).toHaveCount(0);
+  await expect(page.locator("#examples a")).toHaveAttribute("href", "library/index.htm");
   await page.getByRole("button", { name: "Dark", exact: true }).click();
   await expect(page.locator("html")).toHaveAttribute("data-bs-theme", "dark");
   await expect(page.getByRole("button", { name: "Dark", exact: true })).toHaveAttribute("aria-pressed", "true");
-  for (const frameElement of await page.locator("iframe").all()) {
-    const frame = await frameElement.contentFrame();
-    await expect(frame.locator("html")).toHaveAttribute("data-bs-theme", "dark");
-  }
-  const source = page.locator('[data-example-source="carousel"]');
-  await clickAfterScroll(source.locator(":scope > .source-toggle"));
-  await expect(source.locator(":scope > .source-panel")).toHaveClass(/ae--pop\b/);
-  await expect(source.locator(":scope > .source-panel")).not.toHaveClass(/ae--popping\b/);
-  await expect(source.locator(".source-file > .source-toggle")).toHaveText([
-    "examples/carousel.htm", "examples/carousel.js"
-  ]);
-  for (const file of await source.locator(".source-file").all()) {
-    const path = await file.locator(":scope > .source-toggle").textContent();
-    await clickAfterScroll(file.locator(":scope > .source-toggle"));
-    await expect(file.locator(":scope > .source-panel")).toHaveClass(/ae--pop\b/);
-    await expect(file.locator(":scope > .source-panel")).not.toHaveClass(/ae--popping\b/);
-    await expect(file.getByRole("button", { name: `Copy ${path}`, exact: true })).toBeEnabled();
-    await expect(file.locator("code")).toHaveAttribute("data-highlighted", "yes");
-    await expect(file.locator("pre")).toHaveAttribute("data-ae-scrollbar", "horizontal vertical");
-    await expect(file.locator("pre")).toHaveAttribute("data-ae-scrollbar-parent", "wrapper");
-    await expect(file.locator(".code-wrapper > [data-ae-scrollbar-vertical]")).toHaveCount(1);
-    await expect(file.locator(".code-wrapper > [data-ae-scrollbar-horizontal]")).toHaveCount(1);
-    await expect(file.locator("pre")).toHaveCSS("background-color", "rgba(0, 0, 0, 0)");
-    await expect(file.locator("code")).toHaveCSS("background-color", "rgba(0, 0, 0, 0)");
-    await expect(file.locator(".code-wrapper")).toHaveCSS("border-top-width", "1px");
-    expect(await file.locator('code [class^="hljs-"]').count()).toBeGreaterThan(0);
-    expect(await file.locator("code").textContent()).toBe(await (await page.request.get(`/${path}`)).text());
-  }
-  await expect(page.locator('script[data-ae-dep="highlightjs"]')).toHaveCount(1);
-  await expect(page.locator('link[data-ae-dep^="highlightjs-css"]')).toHaveCount(2);
   await expect(page.locator('link[data-ae-dep="highlightjs-css-dark"]')).toHaveJSProperty("disabled", false);
   await page.getByRole("button", { name: "Light", exact: true }).click();
   await expect(page.locator('link[data-ae-dep="highlightjs-css-dark"]')).toHaveJSProperty("disabled", true);
-  await expect(page.locator('link[data-ae-dep="highlightjs-css"]')).toHaveJSProperty("disabled", false);
   for (const width of [320, 375, 768, 1440]) {
     await page.setViewportSize({ width, height: 960 });
-    // Anchor and Scrollbox update their geometry through waitLayout after resize.
     await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
   }
-  await page.evaluate(() => document.documentElement.style.fontSize = "200%");
-  await expect.poll(() => page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-  const scripts = await page.evaluate(() => [...document.scripts].map(script => script.src));
-  expect(scripts.some(src => src.includes("bootstrap") && src.endsWith(".js"))).toBe(false);
 });
