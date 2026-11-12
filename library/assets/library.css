@@ -103,11 +103,11 @@ body { height: 100dvh; display: flex; flex-direction: column; overflow: hidden; 
 /* Let fixed fullscreen previews escape the scroll viewports. */
 .library-views, .library-scroll { contain: none; }
 
-#main { padding-top: 1rem; padding-bottom: 1rem; }
-.library-tabs { display: flex; flex: 0 0 auto; border: 1px solid var(--bs-border-color); border-bottom: 0; border-radius: 1rem 1rem 0 0; background: var(--bs-body-bg); }
+#main { padding: 0; }
+.library-tabs { display: flex; flex: 0 0 auto; border: 0; border-radius: 1rem 1rem 0 0; background: var(--bs-body-bg); }
 .library-tabs .btn { flex: 1; border: 0; border-bottom: 3px solid transparent; border-radius: 0; padding: .85rem .5rem; font-size: .85rem; color: var(--bs-secondary-color); }
 .library-tabs .btn[aria-current="page"] { color: var(--bs-body-color); border-bottom-color: var(--bs-warning); font-weight: 650; }
-.library-views { width: 100%; border: 1px solid var(--bs-border-color); border-radius: 0 0 1rem 1rem; background: var(--bs-body-bg); }
+.library-views { width: 100%; border: 0; border-radius: 0 0 1rem 1rem; background: var(--bs-body-bg); }
 .library-scroll { padding: 0 .75rem 1rem; }
 .library-scroll .search-panel { position: static; }
 @media (max-width: 991.98px) {
