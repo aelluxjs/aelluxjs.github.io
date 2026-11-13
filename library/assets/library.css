@@ -1,7 +1,8 @@
 @import url("../../assets/bootstrap-brand.css");
 
-:root { --library-width: 42rem; --library-accent: var(--bs-warning); }
+:root { --library-width: 42rem; --library-accent: var(--bs-warning); --bs-heading-font-family: "Geist", var(--bs-font-sans-serif); }
 @font-face { font-family: "Geist"; font-style: normal; font-weight: 400 700; font-display: swap; src: url("geist-latin.woff2") format("woff2"); }
+h1, h2, h3, h4, h5, h6 { font-family: var(--bs-heading-font-family); }
 body { padding-bottom: calc(5.5rem + env(safe-area-inset-bottom)); -webkit-font-smoothing: antialiased; }
 button, a, input { touch-action: manipulation; }
 .icon { width: 1.2rem; height: 1.2rem; fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }

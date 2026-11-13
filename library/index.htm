@@ -23,7 +23,7 @@
     $ae.init({ mode: "full", useHash: false, syncBootstrapThemeTag: true });
   </script>
   <link rel="stylesheet" href="vendor/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/library.css?v=16">
+  <link rel="stylesheet" href="assets/library.css?v=17">
 </head>
 
 <body>
@@ -54,7 +54,7 @@
       <aside class="col-lg-3 d-none d-lg-block">
         <div class="side-content">
           <p class="overline text-body-secondary">ællux.js / BIBLIOTECA</p>
-          <h1 class="h3 fw-semibold mb-3">Experiências prontas.<br>Do seu jeito.</h1>
+          <h1 class="h3 fw-semibold mb-3">Experiências prontas<span class="text-warning">.</span><br>Do seu jeito<span class="text-warning">.</span></h1>
           <p class="text-body-secondary small mb-4">Encontre o que precisa construir. Experimente a prévia e personalize
             no CodePen.</p>
           <nav class="d-grid gap-2" aria-label="Navegação da biblioteca">
@@ -121,7 +121,7 @@
                 <svg class="icon mb-3" aria-hidden="true">
                   <use href="#i-search"></use>
                 </svg>
-                <h3 class="h5">Nenhum snippet por aqui.</h3>
+                <h3 class="h5">Nenhum snippet por aqui<span class="text-warning">.</span></h3>
                 <p id="empty-message" class="text-body-secondary small mb-3"></p>
                 <button class="btn btn-outline-secondary btn-sm" type="button" data-action="explore">Explorar
                   todos</button>
@@ -136,7 +136,7 @@
             <div class="library-scroll" data-ae-scrollbox="pointer" data-ae-scrollbox-fade="false" tabindex="0"
               aria-label="Categorias">
               <section id="categories-panel" class="pt-4 mb-4" aria-labelledby="categories-title">
-                <h3 id="categories-title" class="h5 mb-3">O que você quer construir?</h3>
+                <h3 id="categories-title" class="h5 mb-3">O que você quer construir<span class="text-warning">?</span></h3>
                 <div id="category-grid" class="row g-3"></div>
               </section>
 
@@ -147,12 +147,12 @@
             <div class="library-scroll" data-ae-scrollbox="pointer" data-ae-scrollbox-fade="false" tabindex="0"
               aria-label="Meus salvos">
               <div class="feed-intro pt-4 pb-3">
-                <h2 class="fw-semibold">Seus snippets favoritos.</h2>
+                <h2 class="fw-semibold">Seus snippets favoritos<span class="text-warning">.</span></h2>
                 <p class="small text-body-secondary">Os exemplos que você salvou para usar depois.</p>
               </div>
               <div id="saved-feed" class="d-grid gap-4"></div>
               <div id="saved-empty" class="text-center border rounded-4 p-5 my-4" hidden>
-                <h3 class="h5">Nenhum snippet por aqui.</h3>
+                <h3 class="h5">Nenhum snippet por aqui<span class="text-warning">.</span></h3>
                 <p class="small text-body-secondary">Salve exemplos pelo marcador ou ajuste os filtros.</p><button
                   class="btn btn-outline-secondary btn-sm" type="button" data-action="explore">Explorar todos</button>
               </div>
@@ -168,7 +168,7 @@
                 <use href="#i-download"></use>
               </svg></span>
             <p class="overline mb-2">LEVE AS IDEIAS COM VOCÊ</p>
-            <h2 class="h5 fw-semibold">Seu próximo insight pode vir offline.</h2>
+            <h2 class="h5 fw-semibold">Seu próximo insight pode vir offline<span class="text-warning">.</span></h2>
             <p class="small text-body-secondary mb-3">Instale a biblioteca e continue experimentando, mesmo sem conexão.
             </p>
             <button class="btn btn-dark btn-sm w-100" type="button" data-action="install">Instalar biblioteca <span
@@ -210,7 +210,7 @@
   </nav>
 
   <dialog id="install-guide" class="install-guide rounded-4 border p-4" aria-labelledby="install-title">
-    <h2 id="install-title" class="h5">A biblioteca, sempre por perto.</h2>
+    <h2 id="install-title" class="h5">A biblioteca, sempre por perto<span class="text-warning">.</span></h2>
     <p class="small text-body-secondary">No menu do navegador, procure “Instalar aplicativo” ou “Adicionar à tela
       inicial”. No Safari do iPhone ou iPad, abra Compartilhar e escolha “Adicionar à Tela de Início”.</p>
     <p id="install-offline-status" class="small"></p>
